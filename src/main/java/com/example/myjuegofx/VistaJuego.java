@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class VistaJuego extends BorderPane {
@@ -13,6 +14,7 @@ public class VistaJuego extends BorderPane {
     private Rectangle paredArriba;
     private Rectangle paredDerecha;
     private Rectangle paredAbajo;
+    private Circle cañon;
 
     private Rectangle tanque;
     private JuegoController controlador;
@@ -24,10 +26,13 @@ public class VistaJuego extends BorderPane {
         this.paredDerecha = new Rectangle();
         this.paredAbajo = new Rectangle();
         this.tanque = new Rectangle();
+        this.cañon= new Circle();
         this.pista = new StackPane();
-        this.controlador = new JuegoController(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista);
+        this.controlador = new JuegoController(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista,cañon);
 
         //Inicializar
+
+
 
         paredIzquierda.setFill(Color.BLACK);
         paredIzquierda.heightProperty().bind(pista.heightProperty());
@@ -45,6 +50,10 @@ public class VistaJuego extends BorderPane {
         paredAbajo.heightProperty().bind(pista.heightProperty().divide(25));
         paredAbajo.widthProperty().bind(pista.widthProperty());
 
+        cañon.setFill(Color.AQUA);
+        //cañon.setRadius(150f);
+
+
         tanque.setFill(Color.GREEN);
         tanque.heightProperty().bind(paredIzquierda.widthProperty());
         tanque.widthProperty().bind(paredIzquierda.widthProperty());
@@ -58,6 +67,8 @@ public class VistaJuego extends BorderPane {
         pista.setAlignment(paredArriba, Pos.TOP_CENTER);
         pista.setAlignment(paredAbajo, Pos.BOTTOM_CENTER);
         pista.setAlignment(tanque, Pos.CENTER);
+        pista.setAlignment(cañon,Pos.CENTER);
+
         this.setCenter(pista);
 
 
