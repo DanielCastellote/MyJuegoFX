@@ -17,21 +17,23 @@ public class JuegoController {
     private Rectangle paredAbajo;
 
     private Rectangle tanque;
-    private Circle cañon;
+
+
+    private double desplX;
+    private double desplY;
     private double velocidad;
     private Timeline animacion;
 
 
     public JuegoController(Rectangle paredIzquierda, Rectangle paredArriba, Rectangle paredDerecha,
-                           Rectangle paredAbajo, Rectangle tanque, StackPane pista,Circle cañon) {
+                           Rectangle paredAbajo, Rectangle tanque, StackPane pista) {
         this.pista = pista;
         this.paredIzquierda = paredIzquierda;
         this.paredArriba = paredArriba;
         this.paredDerecha = paredDerecha;
         this.paredAbajo = paredAbajo;
         this.tanque = tanque;
-        this.cañon=cañon;
-        this.velocidad = 1;
+        this.velocidad = 2;
 
 
         inicializarJuego();
@@ -39,7 +41,41 @@ public class JuegoController {
     }
 
     private void inicializarControles() {
-        moverTanque();
+        pista.setOnKeyPressed(e ->{
+            switch (e.getCode()){
+                case SPACE:
+                    animacion.play();
+                    desplY=0;
+                    desplX=0;
+                    break;
+                case RIGHT:
+                    desplX=1*velocidad;
+                    desplY=0;
+                    break;
+                case LEFT:
+                    desplX=-1*velocidad;
+                    desplY=0;
+                    break;
+                case DOWN :
+                    desplX=0;
+                    desplY=1*velocidad;
+                    break;
+                case UP :
+                    desplX=0;
+                    desplY=-1*velocidad;
+                    break;
+                case A :
+                    tanque.setRotate(tanque.getRotate()+10);
+                    break;
+                case D :
+                    tanque.setRotate(tanque.getRotate()-10);
+                    break;
+            }
+            //animacion.play();
+        });
+       /* tanque.setOnMouseMoved(r->{
+            tanque.setRotate(tanque.getRotate()+70);
+        });*/
         pista.setFocusTraversable(true);
     }
 
@@ -49,31 +85,28 @@ public class JuegoController {
             detectarColision();
         }));
         animacion.setCycleCount(Animation.INDEFINITE);
-        //animacion.play();
+
     }
 
     private void detectarColision() {
         if(tanque.getBoundsInParent().intersects(paredDerecha.getBoundsInParent())){
-           // System.out.println("colision");
-           //tanque.setTranslateX(tanque.getTranslateX()-2);
+           desplX=0;
+        }
+        if(tanque.getBoundsInParent().intersects(paredIzquierda.getBoundsInParent())){
+            desplX=0;
+        }
+        if(tanque.getBoundsInParent().intersects(paredAbajo.getBoundsInParent())){
+            desplY=0;
+        }
+        if(tanque.getBoundsInParent().intersects(paredArriba.getBoundsInParent())){
+            desplY=0;
         }
 
     }
     private void moverTanque() {
-        pista.setOnKeyPressed(e ->{
-            switch (e.getCode()){
-                case RIGHT -> tanque.setTranslateX(tanque.getTranslateX()+2);
-                case LEFT -> tanque.setTranslateX(tanque.getTranslateX()-2);
-                case DOWN -> tanque.setTranslateY(tanque.getTranslateY()+2);
-                case UP -> tanque.setTranslateY(tanque.getTranslateY()-2);
-                //case RIGHT,UP -> tanque.setTranslateY(tanque.getTranslateY()+tanque.setTranslateX(tanque.getTranslateX()+2));
-            }
-            //animacion.play();
-        });
-        //tanque.setTranslateX(tanque.getTranslateX() + 1);//desplazamientoX*velocidad);
-        //tanque.setTranslateY(tanque.getTranslateY() + 1);
-        //tanque.setRotate(tanque.getRotate() + 10);
-        //animacion.setRate();  aumentar velocidad
+        tanque.setTranslateX(tanque.getTranslateX()+desplX);
+        tanque.setTranslateY(tanque.getTranslateY()+desplY);
+
     }
 
 
