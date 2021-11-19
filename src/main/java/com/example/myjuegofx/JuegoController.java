@@ -3,10 +3,20 @@ package com.example.myjuegofx;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.File;
+
 
 public class JuegoController {
     private StackPane pista;
@@ -23,6 +33,13 @@ public class JuegoController {
     private double desplY;
     private double velocidad;
     private Timeline animacion;
+
+    /*String dirCancion= System.getProperty("user.dir")+ File.separator+"src"+ File.separator+"main"+ File.separator+"resources"+ File.separator+"com.example.myjuegofx.audios"+ File.separator;
+*/
+    Media cancionGame = new Media("");
+    MediaPlayer cancion= new MediaPlayer(cancionGame);
+    AudioClip golpePared = new AudioClip("file:///C:/Users/danie/Downloads/PS_METAL_KNOCK_1.mp3");
+
 
 
     public JuegoController(Rectangle paredIzquierda, Rectangle paredArriba, Rectangle paredDerecha,
@@ -47,6 +64,9 @@ public class JuegoController {
                     animacion.play();
                     desplY=0;
                     desplX=0;
+                    for(int i=0;i<1000;i++){
+                        cancion.play();
+                    }
                     break;
                 case RIGHT:
                     desplX=1*velocidad;
@@ -65,17 +85,16 @@ public class JuegoController {
                     desplY=-1*velocidad;
                     break;
                 case A :
-                    tanque.setRotate(tanque.getRotate()+10);
+                    tanque.setRotate(tanque.getRotate()-20);
                     break;
                 case D :
-                    tanque.setRotate(tanque.getRotate()-10);
+                    tanque.setRotate(tanque.getRotate()+20);
                     break;
             }
             //animacion.play();
         });
-       /* tanque.setOnMouseMoved(r->{
-            tanque.setRotate(tanque.getRotate()+70);
-        });*/
+
+
         pista.setFocusTraversable(true);
     }
 
@@ -83,23 +102,29 @@ public class JuegoController {
         this.animacion = new Timeline(new KeyFrame(Duration.millis(17), t -> {
             moverTanque();
             detectarColision();
+            crearEnemigos(20);
         }));
+
         animacion.setCycleCount(Animation.INDEFINITE);
 
     }
 
     private void detectarColision() {
         if(tanque.getBoundsInParent().intersects(paredDerecha.getBoundsInParent())){
-           desplX=0;
+           desplX=-1;
+           golpePared.play();
         }
         if(tanque.getBoundsInParent().intersects(paredIzquierda.getBoundsInParent())){
-            desplX=0;
+            desplX=1;
+            golpePared.play();
         }
         if(tanque.getBoundsInParent().intersects(paredAbajo.getBoundsInParent())){
-            desplY=0;
+            desplY=-1;
+            golpePared.play();
         }
         if(tanque.getBoundsInParent().intersects(paredArriba.getBoundsInParent())){
-            desplY=0;
+            desplY=1;
+            golpePared.play();
         }
 
     }
@@ -109,5 +134,18 @@ public class JuegoController {
 
     }
 
+    private void crearEnemigos(int cantidadEnemigos){
+        int posicion=10;
+
+        for(int i=0; i<cantidadEnemigos;i++){
+           Rectangle enemigo = new Rectangle(20,20, Color.BROWN);
+           enemigo.setTranslateX(posicion*i);
+           enemigo.setTranslateY(posicion*i);
+
+           pista.getChildren().add(enemigo);
+
+
+        }
+    }
 
 }

@@ -21,6 +21,8 @@ public class VistaJuego extends BorderPane {
     private Rectangle tanque;
     private JuegoController controlador;
 
+
+
     public VistaJuego() {
         //Instanciar
         this.paredIzquierda = new Rectangle();
@@ -35,6 +37,7 @@ public class VistaJuego extends BorderPane {
 
         pista.setStyle("-fx-background-image: url(https://www.arielcelaya.com.ar/multimedia/wp-content/uploads/2015/10/FondoLejos.png)");
 
+        pista.setMinSize(0,0);
         paredIzquierda.setFill(Color.BLACK);
         paredIzquierda.heightProperty().bind(pista.heightProperty());
         paredIzquierda.widthProperty().bind(pista.widthProperty().divide(20));
@@ -55,6 +58,7 @@ public class VistaJuego extends BorderPane {
         tanque.heightProperty().bind(paredIzquierda.widthProperty());
         tanque.widthProperty().bind(paredIzquierda.widthProperty());
         tanque.setStyle("-fx-fill: url(https://thumbs.dreamstime.com/b/icono-resumido-del-pixel-avi%C3%B3n-completamente-editable-141541266.jpg)");
+
 
 
         //Colocar
