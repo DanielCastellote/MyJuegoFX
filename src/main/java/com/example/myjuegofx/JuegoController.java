@@ -36,7 +36,7 @@ public class JuegoController {
 
     /*String dirCancion= System.getProperty("user.dir")+ File.separator+"src"+ File.separator+"main"+ File.separator+"resources"+ File.separator+"com.example.myjuegofx.audios"+ File.separator;
 */
-    Media cancionGame = new Media("");
+    Media cancionGame = new Media("file:///C:/Users/danie/Downloads/guerra-de-las-galaxias-starwras-musica-.mp3");
     MediaPlayer cancion= new MediaPlayer(cancionGame);
     AudioClip golpePared = new AudioClip("file:///C:/Users/danie/Downloads/PS_METAL_KNOCK_1.mp3");
 
@@ -55,6 +55,7 @@ public class JuegoController {
 
         inicializarJuego();
         inicializarControles();
+        crearEnemigos(5);
     }
 
     private void inicializarControles() {
@@ -64,9 +65,7 @@ public class JuegoController {
                     animacion.play();
                     desplY=0;
                     desplX=0;
-                    for(int i=0;i<1000;i++){
-                        cancion.play();
-                    }
+                    cancion.play();
                     break;
                 case RIGHT:
                     desplX=1*velocidad;
@@ -102,7 +101,7 @@ public class JuegoController {
         this.animacion = new Timeline(new KeyFrame(Duration.millis(17), t -> {
             moverTanque();
             detectarColision();
-            crearEnemigos(20);
+            //crearEnemigos(2);
         }));
 
         animacion.setCycleCount(Animation.INDEFINITE);
@@ -135,16 +134,17 @@ public class JuegoController {
     }
 
     private void crearEnemigos(int cantidadEnemigos){
-        int posicion=10;
+
 
         for(int i=0; i<cantidadEnemigos;i++){
-           Rectangle enemigo = new Rectangle(20,20, Color.BROWN);
-           enemigo.setTranslateX(posicion*i);
-           enemigo.setTranslateY(posicion*i);
+           Rectangle enemigo = new Rectangle(20,20);
+           enemigo.setTranslateX((int) Math.floor(Math.random() * 200 -200));
+           enemigo.setTranslateY((int) Math.floor(Math.random() * 200 -200));
 
-           pista.getChildren().add(enemigo);
+            enemigo.setStyle("-fx-fill: url(https://w7.pngwing.com/pngs/187/1011/png-transparent-space-invaders-arcade-game-video-game-gamenight-game-angle-text-thumbnail.png)");
 
 
+            pista.getChildren().add(enemigo);
         }
     }
 
