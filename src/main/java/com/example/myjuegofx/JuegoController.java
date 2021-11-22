@@ -27,17 +27,14 @@ public class JuegoController {
     private Rectangle paredAbajo;
 
     private Rectangle tanque;
-    private Rectangle enemigo;
-
 
     private double desplX;
     private double desplY;
 
-    private double eneX;
-    private double eneY;
-
     private double velocidad;
     private Timeline animacion;
+
+    private Enemigos enem;
 
 
     Media cancionGame = new Media("file:///C:/Users/danie/Downloads/guerra-de-las-galaxias-starwras-musica-.mp3");
@@ -66,14 +63,11 @@ public class JuegoController {
         pista.setOnKeyPressed(e ->{
             switch (e.getCode()){
                 case SPACE:
-                    crearEnemigos(1);
+                    enem= new Enemigos(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista);
                     animacion.play();
                     desplY=0;
                     desplX=0;
                     cancion.play();
-                    eneX=1;
-                    eneY=0;
-                    //tanque.setVisible(true);
                     break;
                 case RIGHT:
                     desplX=1*velocidad;
@@ -113,8 +107,8 @@ public class JuegoController {
         this.animacion = new Timeline(new KeyFrame(Duration.millis(17), t -> {
             moverTanque();
             detectarColision();
-            //crearEnemigos(2);
-            moverEnemigo();
+
+            //moverEnemigo();
 
         }));
 
@@ -140,20 +134,6 @@ public class JuegoController {
             golpePared.play();
         }
 
-        if(tanque.getBoundsInParent().intersects(enemigo.getBoundsInParent())){
-
-            enemigo.setVisible(false);
-        }
-        if(enemigo.getBoundsInParent().intersects(paredDerecha.getBoundsInParent())){
-           eneX=-1;
-           //golpePared.play();
-        }
-        if(enemigo.getBoundsInParent().intersects(paredIzquierda.getBoundsInParent())){
-            eneX=1;
-           //golpePared.play();
-        }
-
-
     }
     private void moverTanque() {
 
@@ -161,14 +141,13 @@ public class JuegoController {
         tanque.setTranslateY(tanque.getTranslateY()+desplY*velocidad);
 
     }
-    private void moverEnemigo(){
+   /* private void moverEnemigo(){
 
         enemigo.setTranslateX(enemigo.getTranslateX()+eneX*velocidad);
 
     }
 
     private void crearEnemigos(int cantidadEnemigos){
-
         for(int i=0; i<cantidadEnemigos;i++){
            enemigo = new Rectangle(20,20);
            enemigo.setTranslateX((int) Math.floor(Math.random() * 200 -200));
@@ -180,15 +159,5 @@ public class JuegoController {
 
             pista.getChildren().add(enemigo);
         }
-       /* for(int i=0; i<cantidadEnemigos;i++){
-            enemigo = new Rectangle(20,20);
-            enemigo.setTranslateX((int) Math.floor(Math.random() * -200 +200));
-            enemigo.setTranslateY((int) Math.floor(Math.random() * 200 -200));
-
-            enemigo.setStyle("-fx-fill: url(https://w7.pngwing.com/pngs/187/1011/png-transparent-space-invaders-arcade-game-video-game-gamenight-game-angle-text-thumbnail.png)");
-            //moverEnemigo();
-
-            pista.getChildren().add(enemigo);
-        }*/
-    }
+    }*/
 }
