@@ -21,6 +21,8 @@ public class VistaJuego extends BorderPane {
     private Rectangle tanque;
     private JuegoController controlador;
 
+    private Enemigos enemigos;
+
 
 
     public VistaJuego() {
@@ -32,6 +34,7 @@ public class VistaJuego extends BorderPane {
         this.tanque = new Rectangle();
         this.pista = new StackPane();
         this.controlador = new JuegoController(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista);
+        this.enemigos= new Enemigos();
 
         //Inicializar
 
