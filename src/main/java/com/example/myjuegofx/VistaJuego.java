@@ -2,13 +2,13 @@ package com.example.myjuegofx;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+
+import java.io.File;
 
 public class VistaJuego extends BorderPane {
 
@@ -24,7 +24,6 @@ public class VistaJuego extends BorderPane {
     private Enemigos enemigos;
 
 
-
     public VistaJuego() {
         //Instanciar
         this.paredIzquierda = new Rectangle();
@@ -38,7 +37,7 @@ public class VistaJuego extends BorderPane {
 
         //Inicializar
 
-        pista.setStyle("-fx-background-image: url(https://www.arielcelaya.com.ar/multimedia/wp-content/uploads/2015/10/FondoLejos.png)");
+        pista.setStyle("-fx-background-image: url(fondo.png)");
 
         pista.setMinSize(0,0);
         paredIzquierda.setFill(Color.BLACK);
@@ -60,7 +59,7 @@ public class VistaJuego extends BorderPane {
         tanque.setFill(Color.GRAY);
         tanque.heightProperty().bind(paredIzquierda.widthProperty());
         tanque.widthProperty().bind(paredIzquierda.widthProperty());
-        tanque.setStyle("-fx-fill: url(https://thumbs.dreamstime.com/b/icono-resumido-del-pixel-avi%C3%B3n-completamente-editable-141541266.jpg)");
+        tanque.setFill(new ImagePattern(new Image("nave.png")));
 
 
 

@@ -3,19 +3,13 @@ package com.example.myjuegofx;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.File;
 
 
 public class JuegoController {
@@ -36,7 +30,7 @@ public class JuegoController {
 
     private Enemigos enem;
 
-
+//Configurar rutas para multiplataforma
     Media cancionGame = new Media("file:///C:/Users/danie/Downloads/guerra-de-las-galaxias-starwras-musica-.mp3");
     MediaPlayer cancion= new MediaPlayer(cancionGame);
     AudioClip golpePared = new AudioClip("file:///C:/Users/danie/Downloads/PS_METAL_KNOCK_1.mp3");
@@ -111,9 +105,7 @@ public class JuegoController {
             //moverEnemigo();
 
         }));
-
         animacion.setCycleCount(Animation.INDEFINITE);
-
     }
 
     private void detectarColision() {
@@ -141,23 +133,5 @@ public class JuegoController {
         tanque.setTranslateY(tanque.getTranslateY()+desplY*velocidad);
 
     }
-   /* private void moverEnemigo(){
 
-        enemigo.setTranslateX(enemigo.getTranslateX()+eneX*velocidad);
-
-    }
-
-    private void crearEnemigos(int cantidadEnemigos){
-        for(int i=0; i<cantidadEnemigos;i++){
-           enemigo = new Rectangle(20,20);
-           enemigo.setTranslateX((int) Math.floor(Math.random() * 200 -200));
-           enemigo.setTranslateY((int) Math.floor(Math.random() * 200 -200));
-
-
-           enemigo.setStyle("-fx-fill: url(https://w7.pngwing.com/pngs/187/1011/png-transparent-space-invaders-arcade-game-video-game-gamenight-game-angle-text-thumbnail.png)");
-          //moverEnemigo();
-
-            pista.getChildren().add(enemigo);
-        }
-    }*/
 }

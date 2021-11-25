@@ -3,7 +3,9 @@ package com.example.myjuegofx;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -43,9 +45,6 @@ public class Enemigos {
 
         inicializarEnemigos();
         crearEnemigos();
-
-
-
     }
 
     public Enemigos() {
@@ -70,7 +69,7 @@ public class Enemigos {
             enemigo.setTranslateX((int) Math.floor(Math.random() * 200 - 200));
             enemigo.setTranslateY((int) Math.floor(Math.random() * 200 - 200));
 
-            enemigo.setStyle("-fx-fill: url(https://w7.pngwing.com/pngs/187/1011/png-transparent-space-invaders-arcade-game-video-game-gamenight-game-angle-text-thumbnail.png)");
+            enemigo.setFill(new ImagePattern(new Image("enemigo.png")));
 
             pista.getChildren().add(enemigo);
 
