@@ -1,14 +1,15 @@
 package com.example.myjuegofx;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-
-import java.io.File;
+import javafx.scene.text.Font;
 
 public class VistaJuego extends BorderPane {
 
@@ -34,6 +35,7 @@ public class VistaJuego extends BorderPane {
         this.pista = new StackPane();
         this.controlador = new JuegoController(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista);
         this.enemigos= new Enemigos();
+
 
         //Inicializar
 
@@ -71,6 +73,8 @@ public class VistaJuego extends BorderPane {
         pista.setAlignment(paredArriba, Pos.TOP_CENTER);
         pista.setAlignment(paredAbajo, Pos.BOTTOM_CENTER);
         pista.setAlignment(tanque, Pos.CENTER);
+
+
        // pista.setAlignment(cañon,Pos.CENTER);
 
         this.setCenter(pista);
