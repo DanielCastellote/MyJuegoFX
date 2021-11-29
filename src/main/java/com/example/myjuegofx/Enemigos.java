@@ -3,10 +3,15 @@ package com.example.myjuegofx;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -28,8 +33,15 @@ public class Enemigos {
     private double velocidad;
     private Timeline animacionEnemigos;
 
+    private JuegoController v;
+
     private Rectangle enemigo;
     List<Rectangle> listaEnemigos = new ArrayList<>();
+
+    private Label score= new Label();
+    private long puntuacion=0;
+
+
 
     public Enemigos(Rectangle paredIzquierda, Rectangle paredArriba, Rectangle paredDerecha,
                     Rectangle paredAbajo, Rectangle tanque, StackPane pista) {
@@ -43,8 +55,11 @@ public class Enemigos {
         this.eneX=1;
         this.eneY=1;
 
+
+        crearMarcador();
         inicializarEnemigos();
         crearEnemigos();
+
     }
 
     public Enemigos() {
@@ -55,6 +70,7 @@ public class Enemigos {
 
             moverEnemigo();
             detectarColision();
+
         }));
         animacionEnemigos.setCycleCount(Animation.INDEFINITE);
         animacionEnemigos.play();
@@ -82,6 +98,7 @@ public class Enemigos {
         //toque con el tanque
         if (tanque.getBoundsInParent().intersects(listaEnemigos.get(0).getBoundsInParent())) {
             listaEnemigos.get(0).setVisible(false);
+            setPuntuacion(puntuacion+100);
         }
         if (tanque.getBoundsInParent().intersects(listaEnemigos.get(1).getBoundsInParent())) {
             listaEnemigos.get(1).setVisible(false);
@@ -137,5 +154,23 @@ public class Enemigos {
         listaEnemigos.get(0).setTranslateX(listaEnemigos.get(0).getTranslateX()+eneX*velocidad);
 
     }
+    private void crearMarcador(){
 
+        score.setText("SCORE: "+getPuntuacion());
+        score.setTextFill(Color.WHITE);
+        score.setFont(new Font("Bauhaus 93",25));
+        score.setPrefSize(500,500);
+        score.setAlignment(Pos.BOTTOM_CENTER);
+        score.setPadding(new Insets(0,0,20,275));
+
+        pista.getChildren().addAll(score);
+    }
+
+    public long getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(long puntuacion) {
+        this.puntuacion = puntuacion;
+    }
 }

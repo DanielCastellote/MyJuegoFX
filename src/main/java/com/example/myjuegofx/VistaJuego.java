@@ -1,15 +1,12 @@
 package com.example.myjuegofx;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 
 public class VistaJuego extends BorderPane {
 

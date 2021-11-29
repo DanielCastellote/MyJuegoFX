@@ -3,16 +3,11 @@ package com.example.myjuegofx;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 
@@ -35,11 +30,6 @@ public class JuegoController {
 
     private Enemigos enem;
 
-    private Label score= new Label();
-    private long puntuacion=100;
-
-
-
 //Configurar rutas para multiplataforma
     Media cancionGame = new Media("file:///C:/Users/danie/Downloads/guerra-de-las-galaxias-starwras-musica-.mp3");
     MediaPlayer cancion= new MediaPlayer(cancionGame);
@@ -61,7 +51,7 @@ public class JuegoController {
 
         inicializarJuego();
         inicializarControles();
-        crearMarcador();
+        //crearMarcador();
 
     }
 
@@ -74,6 +64,7 @@ public class JuegoController {
                     desplY=0;
                     desplX=0;
                     cancion.play();
+                    cancion.setCycleCount(MediaPlayer.INDEFINITE);
                     break;
                 case RIGHT:
                     desplX=1*velocidad;
@@ -144,17 +135,6 @@ public class JuegoController {
         tanque.setTranslateY(tanque.getTranslateY()+desplY*velocidad);
 
     }
-    private void crearMarcador(){
 
-        score.setText("SCORE: "+puntuacion);
-        score.setTextFill(Color.WHITE);
-        score.setFont(new Font("Bauhaus 93",25));
-        score.setPrefSize(500,500);
-        score.setAlignment(Pos.BOTTOM_CENTER);
-        score.setPadding(new Insets(0,0,20,275));
-
-        pista.getChildren().addAll(score);
-
-    }
 
 }
