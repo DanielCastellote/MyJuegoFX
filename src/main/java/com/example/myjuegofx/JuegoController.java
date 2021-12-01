@@ -3,10 +3,12 @@ package com.example.myjuegofx;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -21,6 +23,7 @@ public class JuegoController {
     private Rectangle paredAbajo;
 
     private Rectangle tanque;
+    private Rectangle bala;
 
     private double desplX;
     private double desplY;
@@ -45,6 +48,7 @@ public class JuegoController {
         this.paredDerecha = paredDerecha;
         this.paredAbajo = paredAbajo;
         this.tanque = tanque;
+        this.bala= new Rectangle();
         this.velocidad = 1.5;
 
 
@@ -92,6 +96,9 @@ public class JuegoController {
                 case D :
                     tanque.setRotate(tanque.getRotate()+20);
                     break;
+                case R:
+                    disparar();
+                    break;
             }
             //animacion.play();
         });
@@ -103,6 +110,7 @@ public class JuegoController {
         this.animacion = new Timeline(new KeyFrame(Duration.millis(17), t -> {
             moverTanque();
             detectarColision();
+            moverDisparo();
 
             //moverEnemigo();
         }));
@@ -134,6 +142,21 @@ public class JuegoController {
         tanque.setTranslateX(tanque.getTranslateX()+desplX*velocidad);
         tanque.setTranslateY(tanque.getTranslateY()+desplY*velocidad);
 
+    }
+
+    private void disparar(){
+        bala.heightProperty().bind(pista.heightProperty().divide(35));
+        bala.widthProperty().bind(pista.widthProperty().divide(45));
+        bala.setFill(new ImagePattern(new Image("4.png")));
+
+        bala.setTranslateY(bala.getTranslateY()-3);
+
+    }
+
+    private void moverDisparo(){
+
+        bala.setTranslateX(tanque.getTranslateX());
+        bala.setTranslateY(tanque.getTranslateY()-20);
     }
 
 
