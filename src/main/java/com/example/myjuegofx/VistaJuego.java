@@ -18,6 +18,7 @@ public class VistaJuego extends BorderPane {
 
     private Rectangle tanque;
 
+    private Rectangle bala;
     private JuegoController controlador;
 
     private Enemigos enemigos;
@@ -31,7 +32,8 @@ public class VistaJuego extends BorderPane {
         this.paredAbajo = new Rectangle();
         this.tanque = new Rectangle();
         this.pista = new StackPane();
-        this.controlador = new JuegoController(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista);
+        this.bala= new Rectangle();
+        this.controlador = new JuegoController(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista,bala);
         this.enemigos= new Enemigos();
 
 
@@ -62,15 +64,20 @@ public class VistaJuego extends BorderPane {
         tanque.widthProperty().bind(paredIzquierda.widthProperty());
         tanque.setFill(new ImagePattern(new Image("nave.png")));
 
+        bala.heightProperty().bind(pista.heightProperty().divide(25));
+        bala.widthProperty().bind(pista.widthProperty().divide(35));
+        bala.setFill(new ImagePattern(new Image("4.png")));
+
 
         //Colocar
 
-        pista.getChildren().addAll(paredIzquierda, paredArriba, paredAbajo, paredDerecha, tanque);
+        pista.getChildren().addAll(paredIzquierda, paredArriba, paredAbajo, paredDerecha, tanque,bala);
         pista.setAlignment(paredIzquierda, Pos.CENTER_LEFT);
         pista.setAlignment(paredDerecha, Pos.CENTER_RIGHT);
         pista.setAlignment(paredArriba, Pos.TOP_CENTER);
         pista.setAlignment(paredAbajo, Pos.BOTTOM_CENTER);
         pista.setAlignment(tanque, Pos.CENTER);
+        pista.setAlignment(bala,Pos.CENTER);
 
 
 

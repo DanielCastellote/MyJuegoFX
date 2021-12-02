@@ -28,6 +28,8 @@ public class JuegoController {
     private double desplX;
     private double desplY;
 
+    private double desBala;
+
     private double velocidad;
     private Timeline animacion;
 
@@ -41,21 +43,20 @@ public class JuegoController {
 
 
     public JuegoController(Rectangle paredIzquierda, Rectangle paredArriba, Rectangle paredDerecha,
-                           Rectangle paredAbajo, Rectangle tanque, StackPane pista) {
+                           Rectangle paredAbajo, Rectangle tanque, StackPane pista,Rectangle bala) {
         this.pista = pista;
         this.paredIzquierda = paredIzquierda;
         this.paredArriba = paredArriba;
         this.paredDerecha = paredDerecha;
         this.paredAbajo = paredAbajo;
         this.tanque = tanque;
-        this.bala= new Rectangle();
+        this.bala= bala;
         this.velocidad = 1.5;
 
 
 
         inicializarJuego();
         inicializarControles();
-        //crearMarcador();
 
     }
 
@@ -63,7 +64,7 @@ public class JuegoController {
         pista.setOnKeyPressed(e ->{
             switch (e.getCode()){
                 case SPACE:
-                    enem= new Enemigos(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista);
+                    enem= new Enemigos(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista,bala);
                     animacion.play();
                     desplY=0;
                     desplX=0;
@@ -98,6 +99,7 @@ public class JuegoController {
                     break;
                 case R:
                     disparar();
+
                     break;
             }
             //animacion.play();
@@ -112,7 +114,6 @@ public class JuegoController {
             detectarColision();
             moverDisparo();
 
-            //moverEnemigo();
         }));
         animacion.setCycleCount(Animation.INDEFINITE);
     }
@@ -121,7 +122,6 @@ public class JuegoController {
         if(tanque.getBoundsInParent().intersects(paredDerecha.getBoundsInParent())){
            desplX=-1;
            golpePared.play();
-
         }
         if(tanque.getBoundsInParent().intersects(paredIzquierda.getBoundsInParent())){
             desplX=1;
@@ -145,18 +145,20 @@ public class JuegoController {
     }
 
     private void disparar(){
-        bala.heightProperty().bind(pista.heightProperty().divide(35));
-        bala.widthProperty().bind(pista.widthProperty().divide(45));
-        bala.setFill(new ImagePattern(new Image("4.png")));
 
-        bala.setTranslateY(bala.getTranslateY()-3);
+        //bala=new Rectangle();
+
+        bala.setTranslateY(tanque.getTranslateY()-5);
+        bala.setTranslateX(tanque.getTranslateX());
+
 
     }
 
     private void moverDisparo(){
 
-        bala.setTranslateX(tanque.getTranslateX());
-        bala.setTranslateY(tanque.getTranslateY()-20);
+        bala.setTranslateX(bala.getTranslateX());
+        bala.setTranslateY(bala.getTranslateY()-10);
+
     }
 
 

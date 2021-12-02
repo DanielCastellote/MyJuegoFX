@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -27,6 +28,8 @@ public class Enemigos {
 
     private Rectangle tanque;
 
+    private Rectangle bala;
+
     private double eneX;
     private double eneY;
 
@@ -41,24 +44,27 @@ public class Enemigos {
     private Label score= new Label();
     private long puntuacion=0;
 
+    AudioClip matarEnemigo = new AudioClip("file:///C:/Users/danie/Downloads/000961870_prev.mp3");
 
 
     public Enemigos(Rectangle paredIzquierda, Rectangle paredArriba, Rectangle paredDerecha,
-                    Rectangle paredAbajo, Rectangle tanque, StackPane pista) {
+                    Rectangle paredAbajo, Rectangle tanque, StackPane pista,Rectangle bala) {
         this.pista = pista;
         this.paredIzquierda = paredIzquierda;
         this.paredArriba = paredArriba;
         this.paredDerecha = paredDerecha;
         this.paredAbajo = paredAbajo;
         this.tanque = tanque;
+        this.bala= bala;
         this.velocidad = 1.5;
         this.eneX=1;
         this.eneY=1;
 
 
-        crearMarcador();
+
         inicializarEnemigos();
         crearEnemigos();
+        //crearMarcador();
 
     }
 
@@ -70,6 +76,8 @@ public class Enemigos {
 
             moverEnemigo();
             detectarColision();
+            crearMarcador();
+
 
         }));
         animacionEnemigos.setCycleCount(Animation.INDEFINITE);
@@ -95,22 +103,62 @@ public class Enemigos {
     }
 
     private void detectarColision() {
+        //toque con bala
+        if (bala.getBoundsInParent().intersects(listaEnemigos.get(0).getBoundsInParent())) {
+            listaEnemigos.get(0).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(0).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion+100);
+            matarEnemigo.play();
+        }
+        if (bala.getBoundsInParent().intersects(listaEnemigos.get(1).getBoundsInParent())) {
+            listaEnemigos.get(1).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(1).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion+100);
+            matarEnemigo.play();
+        }
+        if (bala.getBoundsInParent().intersects(listaEnemigos.get(2).getBoundsInParent())) {
+            listaEnemigos.get(2).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(2).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion+100);
+            matarEnemigo.play();
+        }
+        if (bala.getBoundsInParent().intersects(listaEnemigos.get(3).getBoundsInParent())) {
+            listaEnemigos.get(3).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(3).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion+100);
+            matarEnemigo.play();
+        }
+        if (bala.getBoundsInParent().intersects(listaEnemigos.get(4).getBoundsInParent())) {
+            listaEnemigos.get(4).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(4).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion+100);
+            matarEnemigo.play();
+        }
         //toque con el tanque
         if (tanque.getBoundsInParent().intersects(listaEnemigos.get(0).getBoundsInParent())) {
-            listaEnemigos.get(0).setVisible(false);
-            setPuntuacion(puntuacion+100);
+            listaEnemigos.get(0).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(0).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion-100);
         }
         if (tanque.getBoundsInParent().intersects(listaEnemigos.get(1).getBoundsInParent())) {
-            listaEnemigos.get(1).setVisible(false);
+            listaEnemigos.get(1).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(1).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion-100);
         }
         if (tanque.getBoundsInParent().intersects(listaEnemigos.get(2).getBoundsInParent())) {
-            listaEnemigos.get(2).setVisible(false);
+            listaEnemigos.get(2).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(2).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion-100);
         }
         if (tanque.getBoundsInParent().intersects(listaEnemigos.get(3).getBoundsInParent())) {
-            listaEnemigos.get(3).setVisible(false);
+            listaEnemigos.get(3).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(3).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion-100);
         }
         if (tanque.getBoundsInParent().intersects(listaEnemigos.get(4).getBoundsInParent())) {
-            listaEnemigos.get(4).setVisible(false);
+            listaEnemigos.get(4).setTranslateY((int) Math.floor(Math.random() * 200 - 200));
+            listaEnemigos.get(4).setTranslateX((int) Math.floor(Math.random() * 200 - 200));
+            setPuntuacion(puntuacion-100);
         }
         //pared derecha
         if (listaEnemigos.get(0).getBoundsInParent().intersects(paredDerecha.getBoundsInParent())) {
