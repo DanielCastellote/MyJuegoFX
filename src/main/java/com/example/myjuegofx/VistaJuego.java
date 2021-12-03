@@ -64,8 +64,8 @@ public class VistaJuego extends BorderPane {
         tanque.widthProperty().bind(paredIzquierda.widthProperty());
         tanque.setFill(new ImagePattern(new Image("nave.png")));
 
-        bala.heightProperty().bind(pista.heightProperty().divide(25));
-        bala.widthProperty().bind(pista.widthProperty().divide(35));
+        bala.heightProperty().bind(pista.heightProperty().divide(15));
+        bala.widthProperty().bind(pista.widthProperty().divide(25));
         bala.setFill(new ImagePattern(new Image("4.png")));
 
 

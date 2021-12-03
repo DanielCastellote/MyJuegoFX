@@ -3,12 +3,10 @@ package com.example.myjuegofx;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -35,7 +33,7 @@ public class JuegoController {
 
     private Enemigos enem;
 
-//Configurar rutas para multiplataforma
+   //Configurar rutas para multiplataforma
     Media cancionGame = new Media("file:///C:/Users/danie/Downloads/guerra-de-las-galaxias-starwras-musica-.mp3");
     MediaPlayer cancion= new MediaPlayer(cancionGame);
     AudioClip golpePared = new AudioClip("file:///C:/Users/danie/Downloads/PS_METAL_KNOCK_1.mp3");
@@ -146,8 +144,6 @@ public class JuegoController {
 
     private void disparar(){
 
-        //bala=new Rectangle();
-
         bala.setTranslateY(tanque.getTranslateY()-5);
         bala.setTranslateX(tanque.getTranslateX());
 
@@ -158,7 +154,6 @@ public class JuegoController {
 
         bala.setTranslateX(bala.getTranslateX());
         bala.setTranslateY(bala.getTranslateY()-10);
-
     }
 
 
