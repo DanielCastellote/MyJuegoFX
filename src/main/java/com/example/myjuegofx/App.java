@@ -18,6 +18,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.getIcons().add(new Image("https://key0.cc/images/preview/40456_38559973bb6b5cf93213a7d5c030c3f3.png"));
         stage.show();
+        stage.setResizable(false);
     }
 
     public static void main(String[] args) {

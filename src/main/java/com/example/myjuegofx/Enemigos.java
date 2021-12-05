@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,10 @@ public class Enemigos {
     private Label score= new Label();
     private IntegerProperty puntuacion;
 
-    AudioClip matarEnemigo = new AudioClip("file:///C:/Users/danie/Downloads/000961870_prev.mp3");
+    AudioClip matarEnemigo = new AudioClip(getClass().getResource("/music/disparo.mp3").toString());
+
+    String rutaImages = "file:///" + System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources"
+            + File.separator + "images" + File.separator;
 
 
     public Enemigos(Rectangle paredIzquierda, Rectangle paredArriba, Rectangle paredDerecha,
@@ -93,7 +97,7 @@ public class Enemigos {
             enemigo.setTranslateX((int) Math.floor(Math.random() * 200 - 200));
             enemigo.setTranslateY((int) Math.floor(Math.random() * 200 - 200));
 
-            enemigo.setFill(new ImagePattern(new Image("enemigo.png")));
+            enemigo.setFill(new ImagePattern(new Image(rutaImages+"enemigo.png")));
 
             pista.getChildren().add(enemigo);
 

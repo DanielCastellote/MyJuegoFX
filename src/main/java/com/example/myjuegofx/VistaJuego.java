@@ -2,11 +2,12 @@ package com.example.myjuegofx;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+
+import java.io.File;
 
 public class VistaJuego extends BorderPane {
 
@@ -22,7 +23,8 @@ public class VistaJuego extends BorderPane {
     private JuegoController controlador;
 
     private Enemigos enemigos;
-
+    String rutaImages = "file:///" + System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources"
+            + File.separator + "images" + File.separator;
 
     public VistaJuego() {
         //Instanciar
@@ -32,17 +34,16 @@ public class VistaJuego extends BorderPane {
         this.paredAbajo = new Rectangle();
         this.tanque = new Rectangle();
         this.pista = new StackPane();
-        this.bala= new Rectangle();
-        this.controlador = new JuegoController(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista,bala);
-        this.enemigos= new Enemigos();
-
+        this.bala = new Rectangle();
+        this.controlador = new JuegoController(paredIzquierda, paredArriba, paredDerecha, paredAbajo, tanque, pista, bala);
+        this.enemigos = new Enemigos();
 
 
         //Inicializar
 
         pista.setStyle("-fx-background-image: url(fondo.png)");
 
-        pista.setMinSize(0,0);
+        pista.setMinSize(0, 0);
         paredIzquierda.setFill(Color.BLACK);
         paredIzquierda.heightProperty().bind(pista.heightProperty());
         paredIzquierda.widthProperty().bind(pista.widthProperty().divide(20));
@@ -62,26 +63,25 @@ public class VistaJuego extends BorderPane {
         tanque.setFill(Color.GRAY);
         tanque.heightProperty().bind(paredIzquierda.widthProperty());
         tanque.widthProperty().bind(paredIzquierda.widthProperty());
-        tanque.setFill(new ImagePattern(new Image("nave.png")));
+        tanque.setFill(new ImagePattern(new Image(rutaImages + "nave.png")));
 
         bala.heightProperty().bind(pista.heightProperty().divide(15));
         bala.widthProperty().bind(pista.widthProperty().divide(25));
-        bala.setFill(new ImagePattern(new Image("4.png")));
+        bala.setFill(new ImagePattern(new Image(rutaImages + "4.png")));
 
 
         //Colocar
 
-        pista.getChildren().addAll(paredIzquierda, paredArriba, paredAbajo, paredDerecha, tanque,bala);
+        pista.getChildren().addAll(paredIzquierda, paredArriba, paredAbajo, paredDerecha, tanque, bala);
         pista.setAlignment(paredIzquierda, Pos.CENTER_LEFT);
         pista.setAlignment(paredDerecha, Pos.CENTER_RIGHT);
         pista.setAlignment(paredArriba, Pos.TOP_CENTER);
         pista.setAlignment(paredAbajo, Pos.BOTTOM_CENTER);
         pista.setAlignment(tanque, Pos.CENTER);
-        pista.setAlignment(bala,Pos.CENTER);
+        pista.setAlignment(bala, Pos.CENTER);
 
 
-
-       // pista.setAlignment(cañon,Pos.CENTER);
+        // pista.setAlignment(cañon,Pos.CENTER);
 
         this.setCenter(pista);
 

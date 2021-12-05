@@ -33,10 +33,13 @@ public class JuegoController {
 
     private Enemigos enem;
 
-   //Configurar rutas para multiplataforma
-    Media cancionGame = new Media("file:///C:/Users/danie/Downloads/guerra-de-las-galaxias-starwras-musica-.mp3");
-    MediaPlayer cancion= new MediaPlayer(cancionGame);
-    AudioClip golpePared = new AudioClip("file:///C:/Users/danie/Downloads/PS_METAL_KNOCK_1.mp3");
+
+    Media musica = new Media(getClass().getResource("/music/musicaGalaxia.mp3").toString());
+
+    MediaPlayer cancion= new MediaPlayer(musica);
+
+    AudioClip golpePared = new AudioClip(getClass().getResource("/music/sonidoMetal.mp3").toString());
+
 
 
 
